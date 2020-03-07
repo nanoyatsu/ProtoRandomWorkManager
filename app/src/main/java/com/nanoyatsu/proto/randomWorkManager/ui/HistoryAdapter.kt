@@ -17,7 +17,8 @@ class HistoryAdapter : PagedListAdapter<History, HistoryAdapter.ViewHolder>(Diff
         getItem(position)?.also { holder.bind(it) }
     }
 
-    class ViewHolder(val binding: ItemHistoryBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: ItemHistoryBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         companion object {
             fun from(parent: ViewGroup): ViewHolder =
                 ViewHolder(ItemHistoryBinding.inflate(LayoutInflater.from(parent.context)))
