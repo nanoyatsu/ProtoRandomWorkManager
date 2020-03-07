@@ -1,6 +1,7 @@
 package com.nanoyatsu.proto.randomWorkManager.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -37,6 +38,10 @@ class MainActivity : AppCompatActivity() {
                     val data = Data.Builder()
                         .apply { putString("created_at", Date().toString()) }.build()
                     setInputData(data)
+                    val random = (Math.random() * 60 * 60).toLong()
+//                    val random = (Math.random() * 60 * 60 * 24).toLong()
+                    Log.d("initial_delay", random.toString())
+                    setInitialDelay(random, TimeUnit.SECONDS)
                 }.build()
         wm.enqueueUniquePeriodicWork("EVERY_HOUR_HIST", ExistingPeriodicWorkPolicy.KEEP, work)
 
