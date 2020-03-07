@@ -25,7 +25,8 @@ class HistoryAdapter : PagedListAdapter<History, HistoryAdapter.ViewHolder>(Diff
         }
 
         fun bind(history: History) {
-            binding.text.text = "${history.id}\n ${history.timestamp}\n ${history.parent}"
+            binding.text.text =
+                "id: ${history.id}\nworked_at: ${history.timestamp}\nworker_created_at: ${history.parent}"
         }
     }
 
