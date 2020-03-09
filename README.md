@@ -15,9 +15,9 @@ I wanted make sure below.
 result, it can.  
 結果は、可能でした。  
 The task in this app, started 0 sec ~ 3600 sec after app-launch, run every 15 min.  
-このアプリのタスクは、アプリ起動後0秒から3600秒で開始され、１５分ごとに動作します。  
+このアプリのタスクは、アプリ起動後0秒から60秒で開始され、15分ごとに動作します。  
 
 also using androidx.room to logging, androidx.paging to viewing.  
 また、記録のためにandroidx.room、閲覧のためにandroidx.pagingを使っています。  
 
-<img src="https://github.com/nredjap/ProtoRandomWorkManager/blob/master/app/src/main/res/document/ScreenShot.png" width=480px>
+<img src="https://github.com/nredjap/ProtoRandomWorkManager/blob/master/document/ScreenShot.png" width=480px>
