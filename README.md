@@ -14,7 +14,7 @@ I wanted make sure below.
 
 result, it can.  
 結果は、可能でした。  
-The task in this app, started 0 sec ~ 3600 sec after app-launch, run every 15 min.  
+The task in this app, started 0 sec ~ 60 sec after app-launch, run every 15 min.  
 このアプリのタスクは、アプリ起動後0秒から60秒で開始され、15分ごとに動作します。  
 
 also using androidx.room to logging, androidx.paging to viewing.  
