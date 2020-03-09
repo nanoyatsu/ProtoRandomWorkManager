@@ -25,29 +25,39 @@ class MainActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         initBinding(binding)
+        requestWork()
     }
 
     private fun initBinding(binding: ActivityMainBinding) {
         val adapter = HistoryAdapter()
         binding.list.adapter = adapter
 
+        val dataSourceFactory = HistoryDatabase.getInstance().historyDao().getAll()
+        val livePagedList = LivePagedListBuilder(dataSourceFactory, 10).build()
+
+        livePagedList.observe(this, Observer { adapter.submitList(it) })
+    }
+
+    private fun requestWork() {
         val wm = WorkManager.getInstance(this)
         val work =
             PeriodicWorkRequest.Builder(LoggingWorker::class.java, 15, TimeUnit.MINUTES)
                 .apply {
                     val data = Data.Builder()
-                        .apply { putString("created_at", Date().toString()) }.build()
+                        .putString("created_at", Date().toString())
+                        .build()
                     setInputData(data)
-                    val random = (Math.random() * 60 * 60).toLong()
-//                    val random = (Math.random() * 60 * 60 * 24).toLong()
-                    Log.d("initial_delay", random.toString())
-                    setInitialDelay(random, TimeUnit.SECONDS)
+
+                    val randomSec = (Math.random() * 60).toLong()
+                    Log.d("initial_delay", randomSec.toString())
+                    setInitialDelay(randomSec, TimeUnit.SECONDS)
+
+                    // アイドル中だけ実施させたいとき
+//                    val constraints = Constraints.Builder()
+//                        .setRequiresDeviceIdle(true)
+//                        .build()
+//                    setConstraints(constraints)
                 }.build()
-        wm.enqueueUniquePeriodicWork("EVERY_HOUR_HIST", ExistingPeriodicWorkPolicy.KEEP, work)
-
-        val dataSourceFactory = HistoryDatabase.getInstance().historyDao().getAll()
-        val livePagedList = LivePagedListBuilder(dataSourceFactory, 10).build()
-
-        livePagedList.observe(this, Observer { adapter.submitList(it) })
+        wm.enqueueUniquePeriodicWork("EVERY_15MIN_HIST", ExistingPeriodicWorkPolicy.KEEP, work)
     }
 }
