@@ -14,4 +14,7 @@ interface HistoryDao {
 
     @Query("select * from history order by id")
     fun getAll(): DataSource.Factory<Int, History>
+
+    @Query("delete from history")
+    fun deleteAll()
 }
